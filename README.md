@@ -22,7 +22,7 @@ Bu proje, bir e-belediye sisteminin temel bileşenlerini içerir. Vatandaşları
 
 1. **Depoyu Klonlayın:**
 ```sh
-git clone https://github.com/bomb1338/Ebelediye.git
+git clone https://github.com/ncrim7/Ebelediye.git
 cd Ebelediye
 ```
 2. **Veritabanı Oluşturma**
