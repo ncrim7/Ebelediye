@@ -1,6 +1,6 @@
 # E-Belediye Projesi
 
-`Web Tabanlı Programlama dersi için geliştirilmiş bir e-belediye sistemidir.`
+`Veritabanı Yönetim Sistemleri dersi için geliştirilmiş bir e-belediye sistemidir.`
 
 ## 💬 Projenin Amaçları
 Bu proje, bir e-belediye sisteminin temel bileşenlerini içerir. Vatandaşların çeşitli hizmetlere erişimini sağlamak, arsaların yönetimini yapmak ve bütçe takibini gerçekleştirmek amacıyla geliştirilmiştir. Proje, aynı zamanda halkın görüşlerini toplamak için anketler sunarak, katılımcı bir yönetim anlayışını benimsemektedir.
@@ -22,7 +22,7 @@ Bu proje, bir e-belediye sisteminin temel bileşenlerini içerir. Vatandaşları
 
 1. **Depoyu Klonlayın:**
 ```sh
-git clone https://github.com/bomb1338/Ebelediye.git
+git clone https://github.com/ncrim7/Ebelediye.git
 cd Ebelediye
 ```
 2. **Veritabanı Oluşturma**
