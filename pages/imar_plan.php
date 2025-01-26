@@ -1,14 +1,22 @@
 <?php
 include '../db.php';
+
 if (isset($_GET['id'])) {
     $conn = connect();
     $id = intval($_GET['id']);
-    $query = "SELECT * FROM imar_planlari WHERE id = $id";
-    $result = $conn->query($query);
+    $stmt = $conn->prepare("SELECT * FROM imar_planlari WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $plan = $result->fetch_assoc();
+    $stmt->close();
     $conn->close();
+
+    if (!$plan) {
+        die("Geçerli bir imar planı bulunamadı.");
+    }
 } else {
-    die("İmar planı bulunamadı.");
+    die("ID parametresi eksik.");
 }
 ?>
 <!DOCTYPE html>
@@ -21,12 +29,13 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <header>
-        <h1>İmar Planı Detayı: <?php echo $plan['plan_adi']; ?></h1>
+        <h1>İmar Planı Detayı: <?php echo htmlspecialchars($plan['plan_adi']); ?></h1>
     </header>
     
     <main>
-        <p>Plan Adı: <?php echo $plan['plan_adi']; ?></p>
-        <p>Tarih: <?php echo $plan['tarih']; ?></p>
+        <p><strong>Plan Adı:</strong> <?php echo htmlspecialchars($plan['plan_adi']); ?></p>
+        <p><strong>Tarih:</strong> <?php echo htmlspecialchars($plan['tarih']); ?></p>
+        <a href="imar_planlari.php">Geri Dön</a>
     </main>
     
     <footer>

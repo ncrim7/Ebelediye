@@ -1,36 +1,38 @@
 <?php
 include '../db.php';
 
-function getArsalar() {
+function getImarPlanlari() {
     $conn = connect();
-    $query = "SELECT * FROM arsalar";
+    $query = "SELECT * FROM imar_planlari";
     $result = $conn->query($query);
-    $arsalar = [];
+    $planlar = [];
     while ($row = $result->fetch_assoc()) {
-        $arsalar[] = $row;
+        $planlar[] = $row;
     }
     $conn->close();
-    return $arsalar;
+    return $planlar;
 }
-$arsalar = getArsalar(); // getArsalar() fonksiyonunu ayrıca tanımlamalısınız.
+
+$imarPlanlari = getImarPlanlari();
 ?>
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arsalar</title>
+    <title>İmar Planları</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <header>
-        <h1>Arsalar</h1>
+        <h1>İmar Planları</h1>
     </header>
     
     <main>
         <ul>
-            <?php foreach ($arsalar as $arsa): ?>
-                <li><a href="arsa.php?id=<?php echo $arsa['id']; ?>"><?php echo $arsa['arsa_no']; ?></a></li>
+            <?php foreach ($imarPlanlari as $plan): ?>
+                <li><a href="imar_plan.php?id=<?php echo $plan['id']; ?>"><?php echo $plan['plan_adi']; ?></a></li>
             <?php endforeach; ?>
         </ul>
     </main>

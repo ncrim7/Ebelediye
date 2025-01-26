@@ -12,7 +12,7 @@
         <nav>
             <a href="index.php">Ana Sayfa</a>
             <a href="pages/arsalar.php">Arsalar</a>
-            <a href="pages/imarlari.php">İmar Planları</a>
+            <a href="pages/imar_planlari.php">İmar Planları</a>
             <a href="pages/vatandaslar.php">Vatandaşlar</a>
             <a href="pages/budce.php">Bütçeler</a>
             <a href="pages/gelir_gider.php">Gelir ve Giderler</a>
