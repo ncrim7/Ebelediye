@@ -1,11 +1,12 @@
 <?php
+$title = "Arsa Detayları";
 include '../db.php'; // Veritabanı bağlantısı için db.php dosyasını dahil et
 
 function getArsaById($id) {
-    $conn = connect(); // Veritabanına bağlan
-    $query = "SELECT * FROM arsalar WHERE id = ?"; // Arsa bilgilerini çek
+    $conn = connect();
+    $query = "SELECT * FROM arsalar WHERE id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id); // Güvenli bir şekilde ID'yi bağla
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $arsa = $result->fetch_assoc();
@@ -14,13 +15,12 @@ function getArsaById($id) {
     return $arsa;
 }
 
-// Gelen ID'yi al
 if (isset($_GET['id'])) {
-    $arsaId = intval($_GET['id']); // Gelen ID'yi güvenli bir şekilde al
+    $arsaId = intval($_GET['id']);
     $arsa = getArsaById($arsaId);
 
     if (!$arsa) {
-        die("Arsa bulunamadı."); // ID yanlışsa hata ver
+        die("Arsa bulunamadı.");
     }
 } else {
     die("Geçersiz arsa ID'si.");
@@ -33,21 +33,23 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($arsa['arsa_no']); ?> - Detay</title>
-    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>Arsa Detayları</h1>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white p-4 shadow-md">
+        <h1 class="text-center text-2xl font-bold">Arsa Detayları</h1>
     </header>
     
-    <main>
-        <h2>Arsa No: <?php echo htmlspecialchars($arsa['arsa_no']); ?></h2>
-        <p><strong>Adres:</strong> <?php echo htmlspecialchars($arsa['adres']); ?></p>
-        <a href="arsalar.php">Geri Dön</a>
+    <main class="container mx-auto mt-6 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Arsa No: <?php echo htmlspecialchars($arsa['arsa_no']); ?></h2>
+        <p class="text-gray-600 mb-2"><strong>Adres:</strong> <?php echo htmlspecialchars($arsa['adres']); ?></p>
+        <a href="arsalar.php" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold">
+            Geri Dön
+        </a>
     </main>
     
-    <footer>
-        <p><a href="../index.php">Ana Sayfaya Dön</a></p>
+    <footer class="bg-gray-200 text-center p-4 mt-6">
+        <a href="../index.php" class="text-blue-600 hover:underline">Ana Sayfaya Dön</a>
     </footer>
 </body>
 </html>
