@@ -33,14 +33,29 @@ if (isset($_GET['id'])) {
         <h1 class="text-center text-2xl font-bold">İmar Planı Detayı</h1>
     </header>
     
-    <main class="container mx-auto mt-6 p-6 bg-white rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mb-4"><?php echo htmlspecialchars($plan['plan_adi']); ?></h2>
-        <p class="text-gray-600"><strong>Tarih:</strong> <?php echo htmlspecialchars($plan['tarih']); ?></p>
-        <p class="text-gray-600 mt-2"><strong>Plan Açıklaması:</strong> Bu plana ait detaylı açıklamalar buraya eklenebilir.</p>
-        <a href="imar_planlari.php" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold">
-            Geri Dön
-        </a>
+    <main class="container mx-auto mt-6 p-6 bg-white shadow-md rounded-lg">
+        <h2 class="text-lg font-semibold"><?php echo htmlspecialchars($plan['plan_adi']); ?></h2>
+        <p class="text-gray-600 mt-2"><strong>Tarih:</strong> <?php echo htmlspecialchars($plan['tarih']); ?></p>
+        <p class="text-gray-600"><strong>Tür:</strong> <?php echo htmlspecialchars($plan['plan_turu']); ?></p>
+        <p class="text-gray-600 mt-2">
+            <strong>Açıklama:</strong> 
+            <?php echo !empty($plan['aciklama']) ? htmlspecialchars($plan['aciklama']) : 'Açıklama bulunmamaktadır.'; ?>
+        </p>
+        <a href="imar_planlari.php" class="text-blue-600 hover:underline block mt-4">Geri Dön</a>
     </main>
+    <p class="text-gray-600 mt-2">
+        <strong>Plan Belgesi:</strong>
+        <?php if (!empty($plan['dosya']) && file_exists("uploads/" . $plan['dosya'])): ?>
+            <a href="uploads/<?php echo htmlspecialchars($plan['dosya']); ?>" target="_blank" class="text-blue-600 hover:underline">
+                PDF Görüntüle
+            </a>
+        <?php else: ?>
+            Belge bulunmamaktadır.
+        <?php endif; ?>
+    </p>
+
+
+
     
     <footer class="bg-gray-200 text-center p-4 mt-6">
         <a href="../index.php" class="text-blue-600 hover:underline">Ana Sayfaya Dön</a>

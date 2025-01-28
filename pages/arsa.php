@@ -34,19 +34,38 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($arsa['arsa_no']); ?> - Detay</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        #map { height: 400px; width: 100%; }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
     <header class="bg-blue-600 text-white p-4 shadow-md">
         <h1 class="text-center text-2xl font-bold">Arsa Detayları</h1>
     </header>
     
-    <main class="container mx-auto mt-6 p-6 bg-white rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mb-4">Arsa No: <?php echo htmlspecialchars($arsa['arsa_no']); ?></h2>
-        <p class="text-gray-600 mb-2"><strong>Adres:</strong> <?php echo htmlspecialchars($arsa['adres']); ?></p>
-        <a href="arsalar.php" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-semibold">
-            Geri Dön
-        </a>
+    <main class="container mx-auto mt-6 p-6 bg-white shadow-md rounded-lg">
+        <h2 class="text-lg font-semibold"><?php echo htmlspecialchars($arsa['arsa_no']); ?></h2>
+        <p class="text-gray-600 mt-2"><strong>Adres:</strong> <?php echo htmlspecialchars($arsa['adres']); ?></p>
+        <p class="text-gray-600"><strong>Boyut:</strong> <?php echo htmlspecialchars($arsa['boyut']); ?> m²</p>
+        <p class="text-gray-600"><strong>Fiyat:</strong> <?php echo number_format($arsa['fiyat'], 2, ',', '.'); ?> ₺</p>
+        <p class="text-gray-600"><strong>İmar Durumu:</strong> <?php echo htmlspecialchars($arsa['imar_durumu']); ?></p>
+        <div id="map" class="mt-4" style="width: 100%; height: 400px;"></div>
+        <a href="arsalar.php" class="text-blue-600 hover:underline block mt-4">Geri Dön</a>
     </main>
+
+    <script>
+        const map = L.map('map').setView([<?php echo $arsa['latitude']; ?>, <?php echo $arsa['longitude']; ?>], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        L.marker([<?php echo $arsa['latitude']; ?>, <?php echo $arsa['longitude']; ?>])
+            .addTo(map)
+            .bindPopup("<?php echo htmlspecialchars($arsa['arsa_no']); ?>")
+            .openPopup();
+    </script>
     
     <footer class="bg-gray-200 text-center p-4 mt-6">
         <a href="../index.php" class="text-blue-600 hover:underline">Ana Sayfaya Dön</a>

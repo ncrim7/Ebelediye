@@ -49,8 +49,13 @@ $anketler = getAnketler();
                         <p class="text-gray-600 mt-2">
                             <strong>Tarih:</strong> <?php echo htmlspecialchars($anket['tarih']); ?>
                         </p>
+                        <a href="anket_cevapla.php?id=<?php echo $anket['id']; ?>" 
+                        class="text-blue-600 hover:underline mt-2 block">
+                            Cevap Ver
+                        </a>
                     </li>
                 <?php endforeach; ?>
+
             <?php else: ?>
                 <p class="text-red-600">Henüz hiçbir anket bulunmamaktadır.</p>
             <?php endif; ?>
