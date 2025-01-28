@@ -8,6 +8,30 @@ CREATE TABLE vatandaslar (
     tc_no VARCHAR(11) UNIQUE NOT NULL
 );
 
+-- cinsiyet, dogum_tarihi ve sehir sütunları eksikse, aşağıdaki sorgularla bu sütunları ekleyin
+ALTER TABLE vatandaslar
+ADD cinsiyet ENUM('Erkek', 'Kadın') NOT NULL,
+ADD dogum_tarihi DATE NOT NULL DEFAULT '1900-01-01',
+ADD sehir VARCHAR(100) NOT NULL;
+ADD email VARCHAR(255) NOT NULL,
+ADD telefon VARCHAR(15) NOT NULL;
+
+UPDATE vatandaslar
+SET cinsiyet = 'Erkek', dogum_tarihi = '1985-05-15', sehir = 'İstanbul'
+WHERE id = 1;
+
+UPDATE vatandaslar
+SET cinsiyet = 'Kadın', dogum_tarihi = '1992-08-20', sehir = 'Ankara'
+WHERE id = 2;
+
+UPDATE vatandaslar
+SET email = CONCAT(LOWER(ad), '.', LOWER(soyad), '@ornek.com'),
+    telefon = CONCAT('0', FLOOR(500 + (RAND() * 400)), FLOOR(1000000 + (RAND() * 9000000)))
+WHERE email = '' OR telefon = '';
+
+
+
+
 -- Arsalar Tablosu
 CREATE TABLE arsalar (
     id INT AUTO_INCREMENT PRIMARY KEY,
